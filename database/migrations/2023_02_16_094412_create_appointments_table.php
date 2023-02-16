@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreign("sales_people_id")->references("id")->on("sales_people");
             $table->dateTime("start_appointment_date");
             $table->dateTime("end_appointment_date");
+            $table->string("subject");
             $table->timestamps();
         });
     }

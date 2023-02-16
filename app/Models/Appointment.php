@@ -32,6 +32,7 @@ class Appointment extends Model
         'sales_people_id',
         'start_appointment_date',
         'end_appointment_date',
+        'subject'
     ];
 
     protected $hidden = ['pivot'];

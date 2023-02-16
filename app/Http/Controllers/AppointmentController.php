@@ -35,9 +35,51 @@ class AppointmentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request, $salesPeopleId): JsonResponse
     {
-        //
+        //get the user connected
+        $user = auth()->user();
+
+        $request->validate([
+            'start_appointment_date' => 'required|date',
+            'end_appointment_date' => 'required|date',
+            'subject' => 'required|string'
+        ]);
+
+        $startAppointmentDate = strtotime($request->start_appointment_date);
+
+        // Check if the date is between saturday and sunday
+        if (date('N', $startAppointmentDate) >= 6) {
+            return response()->json(['message' => 'You can\'t book an appointment on a weekend'], 400);
+
+        }
+
+        $endAppointmentDate = strtotime($request->end_appointment_date);
+
+        // Check if the appointment is before 09h30 and after 17h30
+        if (date('H:i', $startAppointmentDate) <= '09:30' && date('H:i', $endAppointmentDate) >= '17:30') {
+            return response()->json(['message' => 'You can\'t book an appointment before 09h30 and after 17h30'], 400);
+
+        }
+
+        //check if the date is free
+        $appointments = Appointment::where('sales_people_id', $salesPeopleId)->get();
+        foreach ($appointments as $appointment) {
+            if ($request->start_appointment_date = $appointment->start_appointment_date) {
+                return response()->json(['message' => 'This date is already taken'], 400);
+
+            }
+        }
+
+        $appointment = new Appointment();
+        $appointment->user_id = $user->id;
+        $appointment->sales_people_id = $salesPeopleId;
+        $appointment->start_appointment_date = $request->start_appointment_date;
+        $appointment->end_appointment_date = $request->end_appointment_date;
+        $appointment->save();
+
+        return response()->json(['message' => 'Appointment created successfully'], 201);
+
     }
 
     /**

@@ -36,10 +36,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::get('/salespeoles', [SalesPeopleController::class, 'index'])->name('salespeole.index');
+    Route::get('/salespeople/{id}/appointments', [AppointmentController::class, 'index'])->name('appointments.index');
+    Route::post('/salespeople/{id}/appointment/create', [AppointmentController::class, 'store'])->name('appointment.store');
 
+Route::inertia('/salespeople/{id}', 'BookingForm');
 });
-Route::get('/salespeole', [SalesPeopleController::class, 'index'])->name('salespeole.index');
-Route::get('salespeople/{id}/appointments', [AppointmentController::class, 'index'])->name('appointments.index');
-Route::post('salespeople/{id}/appointment/create', [AppointmentController::class, 'store'])->name('appointments.store');
+
 
 require __DIR__.'/auth.php';

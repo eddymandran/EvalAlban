@@ -28,18 +28,21 @@ class AppointmentSeeder extends Seeder
                 'sales_people_id' => $pigonSalesPeople->id,
                 'start_appointment_date' => Carbon::create(2023, 2, 17, 9, 0, 0),
                 'end_appointment_date' => Carbon::create(2023, 2, 17, 10, 0, 0),
+                'subject' => 'test'
             ],
             [
                 'user_id' => $albanUser->id,
                 'sales_people_id' => $leblancSalesPeople->id,
                 'start_appointment_date' => Carbon::create(2023, 2, 17, 10, 0, 0),
                 'end_appointment_date' => Carbon::create(2023, 2, 17, 11, 0, 0),
+                'subject' => 'test2'
             ],
             [
                 'user_id' => $totoUser->id,
                 'sales_people_id' => $sassoeurSalesPeople->id,
                 'start_appointment_date' => Carbon::create(2023, 2, 17, 10, 0, 0),
                 'end_appointment_date' => Carbon::create(2023, 2, 17, 11, 0, 0),
+                'subject' => 'test3'
             ]
         ];
 

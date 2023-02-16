@@ -19,7 +19,14 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "@emotion/react": "^11.10.5",
+        "@emotion/styled": "^11.10.5",
+        "@mui/material": "^5.11.9",
+        "@mui/x-date-pickers": "^5.0.19",
+        "localforage": "^1.10.0",
+        "match-sorter": "^6.3.1",
         "moment": "^2.29.4",
-        "react-big-calendar": "^1.6.7"
+        "react-big-calendar": "^1.6.7",
+        "sort-by": "^1.2.0"
     }
 }
