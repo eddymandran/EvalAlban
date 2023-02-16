@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SalesPeopleController;
 use Illuminate\Foundation\Application;
@@ -38,5 +39,7 @@ Route::middleware('auth')->group(function () {
 
 });
 Route::get('/salespeole', [SalesPeopleController::class, 'index'])->name('salespeole.index');
+Route::get('salespeople/{id}/appointments', [AppointmentController::class, 'index'])->name('appointments.index');
+Route::post('salespeople/{id}/appointment/create', [AppointmentController::class, 'store'])->name('appointments.store');
 
 require __DIR__.'/auth.php';

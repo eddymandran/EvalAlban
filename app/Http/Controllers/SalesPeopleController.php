@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SalesPeople;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -13,10 +14,13 @@ class SalesPeopleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): Collection
+    public function index(): JsonResponse
     {
-        //get all sales people
-      return SalesPeople::all();
+          $salesPeople = SalesPeople::all();
+          if ($salesPeople->isEmpty()) {
+              return response()->json(['message' => 'No sales people found'], 404);
+          }
+        return response()->json($salesPeople);
     }
 
     /**

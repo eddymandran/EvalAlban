@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointment;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -12,9 +13,15 @@ class AppointmentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): Response
+    public function index($salesPeopleId): JsonResponse
     {
-        //
+
+        $appointments = Appointment::where('sales_people_id', $salesPeopleId)->get();
+        if ($appointments->isEmpty()) {
+            return response()->json(['message' => 'No appointments found'], 404);
+        }
+
+        return response()->json($appointments);
     }
 
     /**
