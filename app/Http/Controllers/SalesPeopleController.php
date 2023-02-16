@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\SalesPeople;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -12,9 +13,10 @@ class SalesPeopleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): Response
+    public function index(): Collection
     {
-        //
+        //get all sales people
+      return SalesPeople::all();
     }
 
     /**
